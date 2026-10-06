@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import EventCard from "@/components/EventCard";
-import { events } from "@/lib/events";
+import { getPublicEvents } from "@/lib/event-store";
 import { heroPath, logoPath, site } from "@/lib/site";
+
+export const dynamic = "force-dynamic";
 
 const steps = [
   { n: "1", title: "Elegí tu fecha", text: "Mirá las próximas noches y seleccioná la que quieras." },
@@ -33,7 +35,8 @@ const faqs = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const events = await getPublicEvents();
   const hero = heroPath();
   const logo = logoPath();
 
@@ -91,11 +94,17 @@ export default function Home() {
       <section id="fechas" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-16">
         <h2 className="text-3xl font-extrabold text-brand md:text-4xl">Próximas fechas</h2>
         <p className="mt-2 text-foreground/60">Elegí tu noche y asegurá tu lugar.</p>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {events.map((event) => (
-            <EventCard key={event.slug} event={event} />
-          ))}
-        </div>
+        {events.length === 0 ? (
+          <p className="mt-8 rounded-2xl bg-brand-light p-8 text-center font-semibold text-brand">
+            Muy pronto vamos a anunciar las próximas fechas. ¡Seguinos en Instagram!
+          </p>
+        ) : (
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {events.map((event) => (
+              <EventCard key={event.slug} event={event} />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Cómo comprar */}

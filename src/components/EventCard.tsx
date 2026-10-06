@@ -35,9 +35,15 @@ export default function EventCard({ event }: { event: FortinEvent }) {
           <span className="text-sm">
             Desde <strong className="text-base text-brand">{formatPrice(from)}</strong>
           </span>
-          <span className="rounded-full bg-brand px-4 py-2 text-sm font-bold text-white transition group-hover:bg-brand-dark">
-            Comprar
-          </span>
+          {event.available === 0 ? (
+            <span className="rounded-full bg-foreground/10 px-4 py-2 text-sm font-bold text-foreground/60">
+              Agotado
+            </span>
+          ) : (
+            <span className="rounded-full bg-brand px-4 py-2 text-sm font-bold text-white transition group-hover:bg-brand-dark">
+              {event.available <= 50 ? `¡Últimas ${event.available}!` : "Comprar"}
+            </span>
+          )}
         </div>
       </div>
     </Link>

@@ -13,6 +13,17 @@ export function ensureSchema() {
   schemaReady ??= (async () => {
     const db = sql();
     await db`
+      CREATE TABLE IF NOT EXISTS events (
+        slug text PRIMARY KEY,
+        title text NOT NULL,
+        description text NOT NULL DEFAULT '',
+        starts_at timestamptz NOT NULL,
+        price integer NOT NULL,
+        capacity integer NOT NULL,
+        active boolean NOT NULL DEFAULT true,
+        created_at timestamptz NOT NULL DEFAULT now()
+      )`;
+    await db`
       CREATE TABLE IF NOT EXISTS orders (
         id uuid PRIMARY KEY,
         event_slug text NOT NULL,

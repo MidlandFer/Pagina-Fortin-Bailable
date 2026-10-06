@@ -11,6 +11,7 @@ export default function PurchaseForm({ event }: { event: FortinEvent }) {
   const [whatsapp, setWhatsapp] = useState("");
 
   const ticket = event.tickets.find((t) => t.id === ticketId)!;
+  const maxQty = Math.min(10, event.available);
   const total = ticket.price * quantity;
 
   const field =
@@ -42,11 +43,11 @@ export default function PurchaseForm({ event }: { event: FortinEvent }) {
           name="quantity"
           type="number"
           min={1}
-          max={10}
+          max={maxQty}
           className={field}
           value={quantity}
           onChange={(e) =>
-            setQuantity(Math.min(10, Math.max(1, Number(e.target.value) || 1)))
+            setQuantity(Math.min(maxQty, Math.max(1, Number(e.target.value) || 1)))
           }
         />
       </label>

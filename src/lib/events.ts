@@ -1,47 +1,26 @@
+// Tipos y formato: seguro de importar desde componentes de cliente.
+
 export type TicketType = {
   id: string;
   name: string;
-  /** Precio en pesos argentinos (ARS). Valores provisorios. */
+  /** Precio en pesos argentinos (ARS). */
   price: number;
 };
 
 export type FortinEvent = {
   slug: string;
   title: string;
-  /** Fecha y hora local de Argentina, formato ISO con offset. */
+  /** Fecha y hora de inicio en ISO (UTC). */
   date: string;
   description: string;
   tickets: TicketType[];
+  capacity: number;
+  sold: number;
+  available: number;
+  active: boolean;
 };
 
-// Datos provisorios: las fechas y precios reales se ajustan luego.
-export const events: FortinEvent[] = [
-  {
-    slug: "sabado-1",
-    title: "Fortín Bailable",
-    date: "2026-11-07T23:00:00-03:00",
-    description: "Vení a disfrutar los mejores sábados en el gigante de la Urquiza.",
-    tickets: [{ id: "general", name: "General", price: 10000 }],
-  },
-  {
-    slug: "sabado-2",
-    title: "Fortín Bailable",
-    date: "2026-11-14T23:00:00-03:00",
-    description: "Vení a disfrutar los mejores sábados en el gigante de la Urquiza.",
-    tickets: [{ id: "general", name: "General", price: 10000 }],
-  },
-  {
-    slug: "sabado-3",
-    title: "Fortín Bailable",
-    date: "2026-11-21T23:00:00-03:00",
-    description: "Vení a disfrutar los mejores sábados en el gigante de la Urquiza.",
-    tickets: [{ id: "general", name: "General", price: 10000 }],
-  },
-];
-
-export function getEvent(slug: string) {
-  return events.find((e) => e.slug === slug);
-}
+const TZ = "America/Argentina/Buenos_Aires";
 
 export function formatDate(iso: string) {
   return new Intl.DateTimeFormat("es-AR", {
@@ -50,7 +29,7 @@ export function formatDate(iso: string) {
     month: "long",
     hour: "2-digit",
     minute: "2-digit",
-    timeZone: "America/Argentina/Buenos_Aires",
+    timeZone: TZ,
   }).format(new Date(iso));
 }
 
@@ -60,4 +39,17 @@ export function formatPrice(amount: number) {
     currency: "ARS",
     maximumFractionDigits: 0,
   }).format(amount);
+}
+
+/** ISO (UTC) -> "YYYY-MM-DDTHH:mm" en hora argentina, para <input type="datetime-local">. */
+export function toLocalInput(iso: string) {
+  return new Date(iso)
+    .toLocaleString("sv-SE", { timeZone: TZ })
+    .replace(" ", "T")
+    .slice(0, 16);
+}
+
+/** "YYYY-MM-DDTHH:mm" (hora argentina, UTC-3 sin horario de verano) -> Date. */
+export function fromLocalInput(value: string) {
+  return new Date(`${value}:00-03:00`);
 }

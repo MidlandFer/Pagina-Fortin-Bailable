@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import QRCode from "qrcode";
 import { ensureSchema, sql } from "@/lib/db";
-import { formatDate, getEvent } from "@/lib/events";
+import { getEvent } from "@/lib/event-store";
+import { formatDate } from "@/lib/events";
 import { signTicket } from "@/lib/tokens";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +20,7 @@ export default async function OrderPage({ params }: PageProps<"/pedido/[id]">) {
     SELECT id, event_slug, buyer_name, quantity, status FROM orders WHERE id = ${id}`;
   if (!order) notFound();
 
-  const event = getEvent(order.event_slug);
+  const event = await getEvent(order.event_slug);
   const tickets = await db`
     SELECT id, ticket_type, status FROM tickets WHERE order_id = ${id} ORDER BY created_at, id`;
 

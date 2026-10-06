@@ -1,19 +1,18 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PurchaseForm from "@/components/PurchaseForm";
-import { events, formatDate, getEvent } from "@/lib/events";
+import { getEvent } from "@/lib/event-store";
+import { formatDate } from "@/lib/events";
 import { site } from "@/lib/site";
 
-export function generateStaticParams() {
-  return events.map((e) => ({ slug: e.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export default async function EventPage({
   params,
 }: PageProps<"/eventos/[slug]">) {
   const { slug } = await params;
-  const event = getEvent(slug);
-  if (!event) notFound();
+  const event = await getEvent(slug);
+  if (!event || !event.active) notFound();
 
   return (
     <main>
@@ -56,7 +55,13 @@ export default async function EventPage({
               Tu QR
             </li>
           </ol>
-          <PurchaseForm event={event} />
+          {event.available === 0 ? (
+            <p className="rounded-2xl bg-brand-light p-6 font-bold text-brand">
+              Esta fecha está agotada. ¡Mirá las próximas noches!
+            </p>
+          ) : (
+            <PurchaseForm event={event} />
+          )}
         </div>
 
         <aside className="h-fit rounded-2xl bg-brand-light p-6 text-sm md:sticky md:top-24">
