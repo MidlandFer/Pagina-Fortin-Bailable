@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import EventCard from "@/components/EventCard";
 import { getPublicEvents } from "@/lib/event-store";
-import { heroPath, logoPath, site } from "@/lib/site";
+import { heroPath, heroVideoPath, logoPath, site } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
@@ -41,19 +41,31 @@ export default async function Home() {
     return [];
   });
   const hero = heroPath();
+  const heroVideo = heroVideoPath();
   const logo = logoPath();
 
   return (
     <main>
       {/* Portada */}
       <section className="relative isolate overflow-hidden bg-brand-dark text-white">
-        {hero ? (
+        {heroVideo ? (
+          <video
+            src={heroVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 h-full w-full object-cover motion-reduce:hidden"
+          />
+        ) : hero ? (
           <Image src={hero} alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
         ) : null}
         <div
           className={`absolute inset-0 -z-10 ${
-            hero
-              ? "bg-gradient-to-b from-brand-dark/70 via-brand-dark/60 to-brand-dark"
+            hero || heroVideo
+              ? "bg-gradient-to-b from-brand-dark/70 via-brand-dark/55 to-brand-dark"
               : "bg-gradient-to-br from-brand via-brand-dark to-black"
           }`}
         />
@@ -108,32 +120,6 @@ export default async function Home() {
             ))}
           </div>
         )}
-      </section>
-
-      {/* Video */}
-      <section className="bg-brand-dark text-white">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2">
-          <div>
-            <h2 className="font-script text-5xl leading-tight md:text-6xl">Viví la noche</h2>
-            <p className="mt-4 max-w-md text-lg text-white/80">
-              Luces, música y la mejor energía en el gigante de la Urquiza. Mirá cómo se vive un sábado en el Fortín.
-            </p>
-            <Link href="#fechas" className="mt-6 inline-block rounded-full bg-white px-8 py-3.5 font-bold text-brand hover:bg-brand-light">
-              Quiero mi entrada
-            </Link>
-          </div>
-          <div className="mx-auto aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-3xl bg-black shadow-2xl ring-1 ring-white/20">
-            <iframe
-              src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1748031813008573%2F&show_text=false&width=340&t=0"
-              title="Video de Fortín Bailable"
-              className="h-full w-full border-0"
-              loading="lazy"
-              scrolling="no"
-              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-        </div>
       </section>
 
       {/* Cómo comprar */}

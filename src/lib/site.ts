@@ -25,5 +25,7 @@ export function assetIfExists(...candidates: string[]) {
 export const logoPath = () =>
   assetIfExists("logo-blanco.png", "logo-blanco.svg", "logo-blanco.webp", "logo.png", "logo.svg", "logo.webp");
 
+export const heroVideoPath = () => assetIfExists("video/hero.mp4");
+
 export const heroPath = () =>
   assetIfExists("fotos/hero.jpg", "fotos/hero.jpeg", "fotos/hero.webp", "fotos/hero.png");
