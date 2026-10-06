@@ -36,10 +36,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
             <Link href="/" className="flex items-center gap-3" aria-label="Fortín Bailable, inicio">
               {logo ? (
-                <Image src={logo} alt="Fortín Bailable" width={140} height={48} className="h-10 w-auto" priority />
-              ) : (
-                <span className="text-xl font-extrabold tracking-tight">Fortín Bailable</span>
-              )}
+                <Image src={logo} alt="Fortín Bailable" width={64} height={64} className="h-11 w-11 rounded-xl object-cover" priority />
+              ) : null}
+              <span className="text-xl font-extrabold tracking-tight">Fortín Bailable</span>
             </Link>
             <nav className="flex items-center gap-1 text-sm font-semibold">
               <Link href="/#fechas" className="rounded-full px-4 py-2 hover:bg-white/10">

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import EventCard from "@/components/EventCard";
 import { events } from "@/lib/events";
-import { heroPath, site } from "@/lib/site";
+import { heroPath, logoPath, site } from "@/lib/site";
 
 const steps = [
   { n: "1", title: "Elegí tu fecha", text: "Mirá las próximas noches y seleccioná la que quieras." },
@@ -35,6 +35,7 @@ const faqs = [
 
 export default function Home() {
   const hero = heroPath();
+  const logo = logoPath();
 
   return (
     <main>
@@ -50,7 +51,8 @@ export default function Home() {
               : "bg-gradient-to-br from-brand via-brand-dark to-black"
           }`}
         />
-        <div className="mx-auto max-w-6xl px-5 py-24 md:py-36">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-10 px-5 py-20 md:py-28">
+          <div>
           <p className="inline-block rounded-full bg-white/15 px-4 py-1 text-sm font-semibold backdrop-blur">
             📍 {site.city} · Todos los sábados
           </p>
@@ -68,6 +70,17 @@ export default function Home() {
               Cómo funciona
             </Link>
           </div>
+          </div>
+          {logo ? (
+            <Image
+              src={logo}
+              alt="Fortín Bailable"
+              width={360}
+              height={366}
+              priority
+              className="hidden w-72 shrink-0 rounded-3xl shadow-2xl ring-1 ring-white/20 md:block lg:w-80"
+            />
+          ) : null}
         </div>
       </section>
 
