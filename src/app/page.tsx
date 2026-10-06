@@ -56,9 +56,12 @@ export default function Home() {
           <p className="inline-block rounded-full bg-white/15 px-4 py-1 text-sm font-semibold backdrop-blur">
             📍 {site.city} · Todos los sábados
           </p>
-          <h1 className="mt-5 max-w-3xl text-5xl font-extrabold leading-tight tracking-tight md:text-7xl">
-            Las mejores noches bailables de {site.city}
+          <h1 className="font-script mt-5 max-w-3xl text-6xl leading-tight drop-shadow-lg md:text-8xl">
+            {site.slogan}
           </h1>
+          <p className="mt-3 text-xl font-bold md:text-2xl">
+            Las mejores noches bailables de {site.city}
+          </p>
           <p className="mt-5 max-w-xl text-lg text-white/85 md:text-xl">
             Comprá tu entrada en un minuto, pagá online y recibí tu QR por WhatsApp.
           </p>

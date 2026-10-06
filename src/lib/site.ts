@@ -3,6 +3,7 @@ import path from "node:path";
 
 export const site = {
   name: "Fortín Bailable",
+  slogan: "¡El Gigante de la Urquiza!",
   city: "Olavarría",
   address: "Av. Urquiza 2981, Olavarría",
   mapsUrl:

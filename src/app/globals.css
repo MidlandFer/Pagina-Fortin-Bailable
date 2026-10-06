@@ -18,6 +18,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+.font-script {
+  font-family: var(--font-script), cursive;
+  font-style: italic;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

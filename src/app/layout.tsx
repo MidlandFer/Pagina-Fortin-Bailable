@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Lobster } from "next/font/google";
 import { logoPath, site } from "@/lib/site";
 import "./globals.css";
 
@@ -12,6 +12,12 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const script = Lobster({
+  variable: "--font-script",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -29,7 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es-AR"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${script.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <header className="sticky top-0 z-30 bg-brand/95 text-white backdrop-blur">
@@ -66,7 +72,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-3">
             <div>
               <p className="text-xl font-extrabold">Fortín Bailable</p>
-              <p className="mt-2 text-sm text-white/70">
+              <p className="font-script mt-2 text-2xl text-white/90">
+                {site.slogan}
+              </p>
+              <p className="mt-1 text-sm text-white/70">
                 Los mejores sábados en {site.city}.
               </p>
             </div>
