@@ -8,7 +8,7 @@ export const site = {
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Av+Urquiza+2981+Olavarr%C3%ADa",
   instagram: "https://www.instagram.com/fortinbailable",
-  facebook: "https://www.facebook.com/profile.php?id=61574643161303",
+  facebook: "https://www.facebook.com/fortinbailableolavarria/",
   // Completar cuando se tenga el número de contacto (formato 549 + código de área + número).
   whatsapp: undefined as string | undefined,
 };
