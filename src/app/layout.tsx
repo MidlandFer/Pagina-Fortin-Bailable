@@ -24,7 +24,7 @@ const script = Lobster({
 export const metadata: Metadata = {
   title: "Fortín Bailable Olavarría | Entradas online",
   description:
-    "Comprá tus entradas para Fortín Bailable en Olavarría. Pagá online y recibí tu QR por WhatsApp.",
+    "Fortín Bailable, el gigante de la Urquiza. Comprá tus entradas online para los mejores sábados de Olavarría y recibí tu QR por WhatsApp.",
 };
 
 export const viewport: Viewport = { themeColor: "#0a3d91" };
