@@ -36,7 +36,10 @@ const faqs = [
 ];
 
 export default async function Home() {
-  const events = await getPublicEvents();
+  const events = await getPublicEvents().catch((err) => {
+    console.error("No se pudieron cargar los eventos:", err);
+    return [];
+  });
   const hero = heroPath();
   const logo = logoPath();
 
