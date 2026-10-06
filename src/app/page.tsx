@@ -110,6 +110,32 @@ export default async function Home() {
         )}
       </section>
 
+      {/* Video */}
+      <section className="bg-brand-dark text-white">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2">
+          <div>
+            <h2 className="font-script text-5xl leading-tight md:text-6xl">Viví la noche</h2>
+            <p className="mt-4 max-w-md text-lg text-white/80">
+              Luces, música y la mejor energía en el gigante de la Urquiza. Mirá cómo se vive un sábado en el Fortín.
+            </p>
+            <Link href="#fechas" className="mt-6 inline-block rounded-full bg-white px-8 py-3.5 font-bold text-brand hover:bg-brand-light">
+              Quiero mi entrada
+            </Link>
+          </div>
+          <div className="mx-auto aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-3xl bg-black shadow-2xl ring-1 ring-white/20">
+            <iframe
+              src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1748031813008573%2F&show_text=false&width=340&t=0"
+              title="Video de Fortín Bailable"
+              className="h-full w-full border-0"
+              loading="lazy"
+              scrolling="no"
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Cómo comprar */}
       <section id="como-comprar" className="scroll-mt-20 bg-brand-light">
         <div className="mx-auto max-w-6xl px-5 py-16">
